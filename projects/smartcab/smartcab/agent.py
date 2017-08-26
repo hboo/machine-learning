@@ -61,9 +61,9 @@ class LearningAgent(Agent):
 
         # stringify state
         def to_str(s):
-            return None if s is None else str(s)
+            return str(s) if s else 'None'
         
-        state = to_str(waypoint) + "_" + inputs['light'] + "_" + to_str(inputs['left']) + 
+        state = to_str(waypoint) + "_" + inputs['light'] + "_" + to_str(inputs['left']) + \
                 "_" +  to_str(inputs['oncoming'])
         
         if self.learning:
@@ -120,7 +120,7 @@ class LearningAgent(Agent):
         if not self.learning:
             action = random.choice(self.valid_actions)
         else:
-            if self.epsilon > 0.01 and self.epsilon > random.random():
+            if self.epsilon > random.random():
                 action = random.choice(self.valid_actions)
             else:
                 valid_actions = []
